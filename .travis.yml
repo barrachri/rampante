@@ -23,7 +23,6 @@ install:
 
 script:
   - python setup.py check -rms
-  - DOCKER_HOST=tcp://localhost:27015 tox
 
 after_success:
   - codecov
