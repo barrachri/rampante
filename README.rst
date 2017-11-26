@@ -11,7 +11,7 @@ The name
 
 Rampante means "rampant" in Italian.
 
-Why Kafka and not *?
+Why Kafka?
 ================================================
 
 I like aiokafka, but I plan to switch to Redis as soon as `Stream` will be officially available.
