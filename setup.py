@@ -12,7 +12,6 @@ from typing import Dict, List
 
 from setuptools import Command, find_packages, setup
 
-
 NAME = 'rampante'
 DESCRIPTION = 'a microservices nanoframework. '
 URL = 'https://github.com/barrachri/rampante'
@@ -24,7 +23,6 @@ REQUIRED = [
     "aiokafka==0.3.1",
     "msgpack-python==0.4.8"
 ]
-
 
 here = os.path.abspath(os.path.dirname(__file__))
 
