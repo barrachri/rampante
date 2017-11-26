@@ -8,11 +8,6 @@ lint:
 run-kafka:
 	@docker run -d --name kafka -p 9092:9092 -e ADVERTISED_HOST=localhost -e ADVERTISED_PORT=9092  cassinyio/kafka:2.11_1.0.0
 
-clean-kafka:
-	@docker stop kafka
-	@docker rm kafka
-
-
 test:
 	@docker network create test
 	@docker run -d --name kafka --network test -e ADVERTISED_HOST=kafka -e ADVERTISED_PORT=9092  cassinyio/kafka:2.11_1.0.0

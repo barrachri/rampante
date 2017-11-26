@@ -10,7 +10,7 @@ from rampante import scheduler, subscribe_on
 
 @pytest.mark.asyncio
 async def test_scheduler():
-    KAFKA_URI = os.getenv("KAFKA_URI", "kafka:9092")
+    KAFKA_URI = os.getenv("KAFKA_URI", "localhost:9092")
     check = None
 
     loop = asyncio.get_event_loop()
