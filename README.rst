@@ -23,9 +23,6 @@ Installation
 
    pip install rampante
 
-
-   await func(task[3], task[4], producer)
-
 How to use `subscribe_on`
 ============================
 
@@ -33,9 +30,9 @@ How to use `subscribe_on`
 
     from rampante import subscribe_on
 
-    # The signature of the function should accept 3 params
-    # queue_name for example could be "user.subscribed"
-    # data is a dictionary
+    # The function should accept 3 params
+    # queue_name, for example could be "user.subscribed"
+    # data is a dictionary, it's a msgpacked message sent to Kafka
     # producer is an instance of AIOKafkaProducer, if can you want to create new events
 
     @subscribe_on("user.subscribed")
@@ -47,7 +44,7 @@ How to use `subscribe_on`
         log.info("Event received!")
 
 
-Examples
+Example
 ========================
 
 .. code-block:: python
@@ -87,7 +84,7 @@ Examples
             log.warning("Shutting down!")
 
 
-Examples with aiohttp
+Example with aiohttp
 ========================
 
 .. code-block:: python
