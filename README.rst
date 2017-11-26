@@ -1,6 +1,9 @@
 .. image:: https://travis-ci.org/barrachri/rampante.svg?branch=master
     :target: https://travis-ci.org/barrachri/rampante
 
+.. image:: https://codecov.io/gh/barrachri/rampante/branch/master/graph/badge.svg
+  :target: https://codecov.io/gh/barrachri/rampante
+
 🐎 Rampante
 ================================================
 A fancy and opinionated nanoframework for microservices.
