@@ -17,14 +17,16 @@ services:
 
 install:
   - docker run -d --name kafka -p 9092:9092 -e ADVERTISED_HOST=localhost -e ADVERTISED_PORT=9092  cassinyio/kafka:2.11_1.0.0
-  - pip install tox
-  - tox
-  - docker rm -f kafka
+  - pip install -r requirements/ci.txt
 
 script:
+  - tox
   - python setup.py check -rms
 
 after_success:
   - codecov
+
+after_script:
+  - docker rm -f kafka
 
 # other stages
