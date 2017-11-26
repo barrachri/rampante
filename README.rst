@@ -56,7 +56,6 @@ Examples
     import logging
 
     import msgpack
-    from aiohttp import web
     from aiokafka import AIOKafkaProducer
     from rampante import scheduler, subscribe_on
 
@@ -70,7 +69,6 @@ Examples
 
     KAFKA_URI = 'localhost:9092'
 
-
     @subscribe_on("user.subscribed")
     async def send_a_message(queue_name, data, producer):
         log.info("Event received!")
@@ -83,15 +81,10 @@ Examples
 
     if __name__ == '__main__':
         loop = asyncio.get_event_loop()
-        asyncio.ensure_future(
-            scheduler(kafka_uri=KAFKA_URI, loop=loop, queue_size=10))
-        # On-startup tasks
-        app.on_startup.append(start_event_connection)
-        app.on_startup.append(start_task_manager)
-        # Clean-up tasks
-        app.on_cleanup.append(stop_task_manager)
-        app.on_cleanup.append(stop_event_connection)
-        web.run_app(app)
+        try:
+            loop.run_until_complete(scheduler(kafka_uri=KAFKA_URI, loop=loop, queue_size=10))
+        except KeyboardInterrupt:
+            log.warning("Shutting down!")
 
 
 Examples with aiohttp

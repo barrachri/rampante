@@ -4,6 +4,7 @@ import logging
 import msgpack
 from aiohttp import web
 from aiokafka import AIOKafkaProducer
+
 from rampante import scheduler, subscribe_on
 
 log = logging.getLogger()

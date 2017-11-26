@@ -1,8 +1,6 @@
 import asyncio
 import logging
 
-import msgpack
-from aiokafka import AIOKafkaProducer
 from rampante import scheduler, subscribe_on
 
 log = logging.getLogger()
@@ -15,9 +13,11 @@ log.setLevel(logging.INFO)
 
 KAFKA_URI = 'localhost:9092'
 
+
 @subscribe_on("user.subscribed")
 async def send_a_message(queue_name, data, producer):
     log.info("Event received!")
+
 
 async def stop_task_manager(app):
     """Cancel task manager."""
