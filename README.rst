@@ -33,7 +33,7 @@ How to use `subscribe_on`
     # The function should accept 3 params
     # queue_name, for example could be "user.subscribed"
     # data is a dictionary, it's a msgpacked message sent to Kafka
-    # producer is an instance of AIOKafkaProducer, if can you want to create new events
+    # producer is an instance of AIOKafkaProducer, if you want to send new events
 
     @subscribe_on("user.subscribed")
     async def send_a_message(queue_name, data, producer):
