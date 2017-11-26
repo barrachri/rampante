@@ -1,0 +1,31 @@
+sudo: required
+
+language: python
+
+stages:
+  - name: test
+  - name: deploy
+    if: tag IS present
+
+# build matrix
+python:
+  - "3.6"
+
+# test stage
+services:
+  - docker
+
+install:
+  - make run-kafka
+  - pip install tox
+  - tox
+  - make clean-kafka
+
+script:
+  - python setup.py check -rms
+  - DOCKER_HOST=tcp://localhost:27015 tox
+
+after_success:
+  - codecov
+
+# other stages
