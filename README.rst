@@ -1,6 +1,6 @@
 🐎 Rampante
 ================================================
-A fancy and opinioneted nanoframework for microservices.
+A fancy and opinionated nanoframework for microservices.
 
 
 The name
