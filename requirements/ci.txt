@@ -9,3 +9,4 @@ pytest-cov==2.5.1
 pytest-sugar==0.9.0
 docutils==0.14
 codecov==2.0.9
+Pygments==2.2.0
