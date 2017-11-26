@@ -10,10 +10,10 @@ import sys
 from shutil import rmtree
 from typing import Dict, List
 
-from setuptools import Command, find_packages, setup
+from setuptools import Command, setup
 
 NAME = 'rampante'
-DESCRIPTION = 'a microservices nanoframework. '
+DESCRIPTION = 'A microservices nanoframework. '
 URL = 'https://github.com/barrachri/rampante'
 EMAIL = 'barrachri@gmail.com'
 AUTHOR = 'Christian Barra'
@@ -79,18 +79,21 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     url=URL,
-    packages=find_packages(exclude=('tests',)),
+    # packages=find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
-    # py_modules=['mypackage'],
+    py_modules=['rampante'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
     # },
     install_requires=REQUIRED,
     include_package_data=True,
-    license='Apache License, Version 2.0',
+    license='Apache 2',
     classifiers=[
         # Trove classifiers
+        'Development Status :: 4 - Beta',
+        'Intended Audience :: Developers',
+        'Framework :: AsyncIO',
         # Full list: https://pypi.python.org/pypi?%3Aaction=list_classifiers
         'License :: OSI Approved :: Apache Software License',
         'Programming Language :: Python',
