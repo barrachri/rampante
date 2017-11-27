@@ -17,7 +17,13 @@ services:
 
 install:
   - docker run -d --name streams -p 4222:4222 nats-streaming:0.6.0
-  - pip install tox docutils Pygments
+  - pip install protobuf # HACK!
+  - pip install -r requirements/common.txt
+  - pip install -r requirements/ci.txt
+  - isort -rc -c --diff -m 3 setup.py rampante examples tests
+  - flake8 setup.py rampante examples tests
+  - mypy setup.py rampante examples tests --ignore-missing-imports
+  - py.test --cov rampante --cov tests
 
 script:
   - tox
