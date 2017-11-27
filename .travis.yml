@@ -17,7 +17,7 @@ services:
 
 install:
   - docker run -d --name streams -p 4222:4222 nats-streaming:0.6.0
-  - pip install -r tox docutils Pygments
+  - pip install tox docutils Pygments
 
 script:
   - tox
