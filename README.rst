@@ -46,7 +46,7 @@ How to use `subscribe_on`
 Example
 ========================
 Check the examples inside the folder!
-You need nats-streaming:0.6.0 running, check the Makefile :)
+You need a nats-streaming:0.6.0 running, check the Makefile :)
 
 
 The name
@@ -54,10 +54,10 @@ The name
 
 Rampante means "rampant" in Italian.
 
-Why Kafka?
+Why NATS?
 ================================================
 
-I like aiokafka, but I plan to switch to Redis as soon as `Streams` will be officially available.
+It's written in Go and seems working really!
 
 To Do
 ================================================
