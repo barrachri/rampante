@@ -14,4 +14,4 @@ from .connector import streaming
 from .__version__ import __version__
 
 
-__all__ = ("subscribe_on", "scheduler", "streaming")
+__all__ = ("subscribe_on", "scheduler", "streaming", "__version__")
