@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from rampante import scheduler, subscribe_on
+from rampante import scheduler, streaming, subscribe_on
 
 log = logging.getLogger()
 handler = logging.StreamHandler()
@@ -11,23 +11,30 @@ handler.setFormatter(formatter)
 log.addHandler(handler)
 log.setLevel(logging.INFO)
 
-KAFKA_URI = 'localhost:9092'
+STREAM_URI = "nats://127.0.0.1:4222"
 
 
 @subscribe_on("user.subscribed")
-async def send_a_message(queue_name, data, producer):
-    log.info("Event received!")
+async def send_a_message(queue_name, data):
+    check = data['message']
+    log.info(check)
 
 
-async def stop_task_manager(app):
-    """Cancel task manager."""
-    if 'task_manager' in app:
-        app['task_manager'].cancel()
-        await app['task_manager']
+async def main(loop):
+    """Start queue manager."""
+    await streaming.start(server=STREAM_URI, client_name="service-01", service_group="service-spawner", loop=loop)
+
+
+async def clean(loop):
+    """Stop queue manager."""
+    await streaming.stop()
 
 if __name__ == '__main__':
     loop = asyncio.get_event_loop()
     try:
-        loop.run_until_complete(scheduler(kafka_uri=KAFKA_URI, loop=loop, queue_size=10))
+        loop.run_until_complete(main(loop))
+        loop.run_until_complete(scheduler(queue_size=10))
+        loop.run_forever()
     except KeyboardInterrupt:
+        loop.run_until_complete(clean(loop))
         log.warning("Shutting down!")

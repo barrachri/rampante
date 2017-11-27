@@ -20,7 +20,8 @@ AUTHOR = 'Christian Barra'
 
 # What packages are required for this module to be executed?
 REQUIRED = [
-    "aiokafka==0.3.1",
+    "protobuf==3.5.0.post1",
+    "asyncio-nats-streaming==0.1.0",
     "msgpack-python==0.4.8"
 ]
 
