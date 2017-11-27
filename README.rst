@@ -45,7 +45,9 @@ How to use `subscribe_on`
 
 Example
 ========================
+
 Check the examples inside the folder!
+
 You need a nats-streaming:0.6.0 running, check the Makefile :)
 
 
