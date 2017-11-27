@@ -30,7 +30,7 @@ How to use `subscribe_on`
 
     from rampante import subscribe_on
 
-    # The function should accept 3 params
+    # The function should accept 2 params
     # queue_name, for example could be "user.subscribed"
     # data is a dictionary, it's a msgpacked message sent to Kafka
 
