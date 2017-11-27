@@ -59,7 +59,7 @@ Rampante means "rampant" in Italian.
 Why NATS?
 ================================================
 
-It's written in Go and seems working really!
+It's written in Go and seems working really well!
 
 To Do
 ================================================

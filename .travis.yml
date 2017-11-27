@@ -17,6 +17,7 @@ services:
 
 install:
   - docker run -d --name streams -p 4222:4222 nats-streaming:0.6.0
+  - pip install protobuf==3.5.0.post1
   - pip install -r requirements/ci.txt
 
 script:

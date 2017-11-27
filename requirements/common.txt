@@ -1,3 +1,3 @@
-protobuf
+protobuf==3.5.0.post1
 asyncio-nats-streaming==0.1.0
 msgpack-python==0.4.8
