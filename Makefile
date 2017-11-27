@@ -1,6 +1,6 @@
 # Some simple testing tasks (sorry, UNIX only).
 
-SERVICE=service-email
+SERVICE=service
 
 lint:
 	@tox -e isort,flake8,mypy

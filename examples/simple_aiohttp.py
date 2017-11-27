@@ -30,7 +30,7 @@ async def handle(request):
 
 
 async def start_task_manager(app):
-    """Connect to Kafka."""
+    """Connect to the streams."""
     await streaming.start(server=STREAM_URI, client_name="service-01", service_group="service-spawner", loop=app.loop)
     app['task_manager'] = asyncio.ensure_future(
         scheduler(loop=app.loop, queue_size=10))

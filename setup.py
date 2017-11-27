@@ -10,7 +10,7 @@ import sys
 from shutil import rmtree
 from typing import Dict, List
 
-from setuptools import Command, setup
+from setuptools import Command, find_packages, setup
 
 NAME = 'rampante'
 DESCRIPTION = 'A microservices nanoframework. '
@@ -80,9 +80,9 @@ setup(
     author=AUTHOR,
     author_email=EMAIL,
     url=URL,
-    # packages=find_packages(exclude=('tests',)),
+    packages=find_packages(exclude=('tests',)),
     # If your package is a single module, use this instead of 'packages':
-    py_modules=['rampante'],
+    #py_modules=['rampante'],
 
     # entry_points={
     #     'console_scripts': ['mycli=mymodule:cli'],
