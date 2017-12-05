@@ -39,7 +39,6 @@ async def worker(queue: asyncio.PriorityQueue, app=None):
                 executione_time = time.time() - now
                 log.info(f"Task `{func_name}` completed in {executione_time:.5f} secs.")
             finally:
-                queue.task_done()
                 log.info(f"Task `{func_name}` removed from the queue.")
     except CancelledError:
         log.warning("Consumer cancelled.")

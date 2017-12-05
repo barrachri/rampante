@@ -55,5 +55,6 @@ async def scheduler(*, queue_size: int=10, loop: asyncio.AbstractEventLoop=None,
 
     except CancelledError:
         log.warning("Closing tasks....")
-        await tasks_queue.join()
+        while tasks_queue.empty() is not True:
+            await asyncio.sleep(0)
         worker_task.cancel()
