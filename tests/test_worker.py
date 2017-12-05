@@ -10,7 +10,7 @@ async def test_worker():
     queue = asyncio.PriorityQueue(maxsize=10)
     check = None
 
-    async def add_2_numbers(topic, data):
+    async def add_2_numbers(topic, data, app):
         nonlocal check
         check = "TaskDone"
         await asyncio.sleep(2)

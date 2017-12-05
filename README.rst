@@ -30,16 +30,17 @@ How to use `subscribe_on`
 
     from rampante import subscribe_on
 
-    # The function should accept 2 params
+    # The function should accept 3 params
     # queue_name, for example could be "user.subscribed"
-    # data is a dictionary, it's a msgpacked message sent to Kafka
+    # data is a dictionary, it's a msgpacked message sent to NATS
+    # app, aiohttp app instance (in case)
 
     @subscribe_on("user.subscribed")
-    async def send_a_message(queue_name, data):
+    async def send_a_message(queue_name, data, app):
         log.info("Event received!")
 
     @subscribe_on("user.subscribed", "user.created")
-    async def send_another_message(queue_name, data):
+    async def send_another_message(queue_name, data, app):
         log.info("Event received!")
 
 

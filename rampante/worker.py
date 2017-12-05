@@ -14,10 +14,11 @@ from concurrent.futures import CancelledError
 log = logging.getLogger("rampante.worker")
 
 
-async def worker(queue: asyncio.PriorityQueue):
+async def worker(queue: asyncio.PriorityQueue, app=None):
     """Executor of tasks.
 
     :args queue: an asyncio.PriorityQueue.
+    :args app: aiohttp app instance.
     """
     log.info("Worker loaded...")
     try:
@@ -28,7 +29,7 @@ async def worker(queue: asyncio.PriorityQueue):
             func_name = func.__name__
             log.info(f"Executing task `{func_name}` subscribed on `{task[2]}`")
             try:
-                await func(task[2], task[3])
+                await func(task[2], task[3], app)
             except CancelledError:
                 log.warning(f"Task `{func_name}` cancelled.")
                 raise

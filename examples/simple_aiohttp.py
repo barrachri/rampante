@@ -17,7 +17,7 @@ STREAM_URI = "nats://127.0.0.1:4222"
 
 
 @subscribe_on("user.subscribed")
-async def send_a_message(queue_name, data):
+async def send_a_message(queue_name, data, app):
     log.info("Event received!")
 
 
@@ -33,7 +33,7 @@ async def start_task_manager(app):
     """Connect to the streams."""
     await streaming.start(server=STREAM_URI, client_name="service-01", service_group="service-spawner", loop=app.loop)
     app['task_manager'] = asyncio.ensure_future(
-        scheduler(loop=app.loop, queue_size=10))
+        scheduler(loop=app.loop, queue_size=10, app=app))
 
 
 async def stop_task_manager(app):

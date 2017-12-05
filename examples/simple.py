@@ -15,7 +15,7 @@ STREAM_URI = "nats://127.0.0.1:4222"
 
 
 @subscribe_on("user.subscribed")
-async def send_a_message(queue_name, data):
+async def send_a_message(queue_name, data, app):
     check = data['message']
     log.info(check)
 

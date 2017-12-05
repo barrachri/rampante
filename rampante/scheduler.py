@@ -19,14 +19,14 @@ from .worker import worker
 log = logging.getLogger("rampante.scheduler")
 
 
-async def scheduler(queue_size: int=10, loop: asyncio.AbstractEventLoop=None):
+async def scheduler(*, queue_size: int=10, loop: asyncio.AbstractEventLoop=None, app=None):
     """Launch the task manager."""
     if loop is None:
         loop = asyncio.get_event_loop()
 
     try:
         tasks_queue: asyncio.PriorityQueue = asyncio.PriorityQueue(maxsize=queue_size)
-        worker_task = asyncio.ensure_future(worker(tasks_queue))
+        worker_task = asyncio.ensure_future(worker(tasks_queue, app=app))
 
         async def on_message(msg):
             """Add tasks to the queue."""

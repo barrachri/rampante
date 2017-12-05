@@ -17,7 +17,7 @@ test:
 clean-docker:
 	@docker rm -f streams
 	@docker network rm test
-	@docker rmi $(SERVICE)
+	@docker rm $(SERVICE)
 
 
 .PHONY: lint test clean-docker build

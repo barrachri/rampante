@@ -30,10 +30,7 @@ class _Streaming():
         self.service_group: str = None
 
     async def start(self, server: str, client_name: str, service_group: str, loop: asyncio.AbstractEventLoop=None):
-        """Start connection with the stream
-
-
-        """
+        """Start connection with the streams."""
         if self._status is False:
             loop = loop or asyncio.get_event_loop()
             self.service_group = service_group
@@ -48,7 +45,7 @@ class _Streaming():
             log.info("Streaming already connected.")
 
     async def publish(self, name: str, data: Dict):
-        """Unsubscribe from to a given channel."""
+        """Publish a message inside a queue."""
         if self._status:
             body = msgpack.packb(data)
             await self._sc.publish(name, body)
@@ -56,8 +53,9 @@ class _Streaming():
             raise RuntimeError("Streaming is not active.")
 
     async def subscribe(self, name: str, callback: Union[Callable, Awaitable]):
-        """Unsubscribe from to a given channel."""
-        self._subscription[name] = await self._sc.subscribe(name, queue=self.service_group, durable_name="durable", cb=callback)
+        """Subscribe to a given channel."""
+        self._subscription[name] = await self._sc.subscribe(
+            name, queue=self.service_group, durable_name="durable", cb=callback)
 
     async def unsubscribe(self, name):
         """Unsubscribe from a given channel."""

@@ -14,13 +14,13 @@ async def test_scheduler():
     loop = asyncio.get_event_loop()
 
     @subscribe_on("user.subscribed")
-    async def add_2_numbers(topic, data,):
+    async def add_2_numbers(topic, data, app):
         nonlocal check
         check = data['message']
         await asyncio.sleep(1)
         return check
 
-    await streaming.start(server=STREAM_URI, client_name="service-02", service_group="service-spawner", loop=loop)
+    await streaming.start(server=STREAM_URI, client_name="service-01", service_group="service-spawner", loop=loop)
     worker_task = asyncio.ensure_future(scheduler(queue_size=10))
     await asyncio.sleep(1)
     await streaming.publish("user.subscribed", {"message": "Hello"})
