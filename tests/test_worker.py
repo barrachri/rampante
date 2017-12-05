@@ -20,7 +20,8 @@ async def test_worker():
 
     entry = (1, add_2_numbers, 'my.event', {})
     await queue.put(entry)
-    await queue.join()
+    while queue.empty() is not True:
+        await asyncio.sleep(0)
 
     worker_task.cancel()
 
