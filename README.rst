@@ -65,9 +65,7 @@ It's written in Go and seems working really well!
 To Do
 ================================================
 
-- add circuit breaker
-- add retry
-- add logic when tasks fail
+- add retry/logic when tasks fail
 
 Pull requests are encouraged!
 
