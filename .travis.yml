@@ -16,8 +16,7 @@ services:
   - docker
 
 install:
-  - docker run -d --name streams -p 4222:4222 nats-streaming:0.6.0
-  - pip install protobuf # HACK!
+  - docker run -d --name streams -p 4222:4222 nats-streaming:0.7.0
   - pip install -r requirements/common.txt
   - pip install -r requirements/ci.txt
   - pip install -e .

@@ -1,3 +1,2 @@
-protobuf==3.5.1
-asyncio-nats-streaming==0.1.0
+git+git://github.com/nats-io/asyncio-nats-streaming.git@3f943cc1bd8733230a1733f5821eae0eb9cc9020#egg=asyncio-nats-streaming
 msgpack-python==0.5.1
