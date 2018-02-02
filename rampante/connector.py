@@ -12,6 +12,7 @@ from typing import Awaitable, Callable, Dict, Union
 import msgpack
 from nats.aio.client import Client as NATS
 from stan.aio.client import Client as STAN
+from tenacity import retry, wait_random_exponential
 
 log = logging.getLogger("rampante.connector")
 
@@ -29,6 +30,7 @@ class _Streaming():
         self._subscription: Dict = {}
         self.service_group: str = None
 
+    @retry(wait=wait_random_exponential(multiplier=1, max=10))
     async def start(self, server: str, client_name: str, service_group: str, loop: asyncio.AbstractEventLoop=None):
         """Start connection with the streams."""
         if self._status is False:
