@@ -1,12 +1,12 @@
 flake8==3.5.0
-isort==4.2.15
+isort==4.3.3
 mypy==0.560
-pytest==3.3.2
+pytest==3.4.0
 pytest-aiohttp==0.3.0
 pytest-asyncio==0.8.0
 tox==2.9.1
 pytest-cov==2.5.1
-pytest-sugar==0.9.0
-codecov==2.0.14
+pytest-sugar==0.9.1
+codecov==2.0.15
 docutils==0.14
 Pygments==2.2.0

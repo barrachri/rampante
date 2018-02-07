@@ -1,3 +1,3 @@
 git+git://github.com/nats-io/asyncio-nats-streaming.git@3f943cc1bd8733230a1733f5821eae0eb9cc9020#egg=asyncio-nats-streaming
-msgpack-python==0.5.1
+msgpack-python==0.5.4
 tenacity==4.8.0
