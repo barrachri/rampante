@@ -17,8 +17,10 @@ services:
 
 install:
   - docker run -d --name streams -p 4222:4222 nats-streaming:0.7.0
+  - pip freeze
   - pip install -r requirements/common.txt
   - pip install -r requirements/ci.txt
+  - pip freeze
 
 script:
   - isort -rc -c --diff -m 3 setup.py rampante examples tests
