@@ -17,17 +17,16 @@ services:
 
 install:
   - docker run -d --name streams -p 4222:4222 nats-streaming:0.7.0
-  - pip install pipenv
-  - pipenv --three
-  - pipenv istall -r requirements/common.txt
-  - pipenv istall -r requirements/ci.txt
+  - pip install -U attrs
+  - pip istall -r requirements/common.txt
+  - pip istall -r requirements/ci.txt
 
 script:
-  - pipenv run isort -rc -c --diff -m 3 setup.py rampante examples tests
-  - pipenv run flake8 setup.py rampante examples tests
-  - pipenv run mypy setup.py rampante examples tests --ignore-missing-imports
-  - pipenv run py.test --cov rampante --cov tests
-  - pipenv python setup.py check -rms
+  - isort -rc -c --diff -m 3 setup.py rampante examples tests
+  - flake8 setup.py rampante examples tests
+  - mypy setup.py rampante examples tests --ignore-missing-imports
+  - py.test --cov rampante --cov tests
+  - python setup.py check -rms
 
 after_success:
   - codecov
