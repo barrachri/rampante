@@ -20,6 +20,7 @@ install:
   - pip install -U attrs
   - pip install -r requirements/common.txt
   - pip install -r requirements/ci.txt
+  - pip install -e .
 
 script:
   - isort -rc -c --diff -m 3 setup.py rampante examples tests
