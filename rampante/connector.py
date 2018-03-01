@@ -73,7 +73,6 @@ class _Streaming():
         await self._sc.close()
         await self._nc.close()
         self._status = False
-        self.publish = None
 
 
 streaming = _Streaming()
