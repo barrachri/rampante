@@ -46,11 +46,12 @@ class _Streaming():
         else:
             log.info("Streaming already connected.")
 
-    async def publish(self, name: str, data: Dict):
+    async def publish(self, name: str, data: Dict) -> None:
         """Publish a message inside a queue."""
         if self._status:
             body = msgpack.packb(data)
             await self._sc.publish(name, body)
+            log.info(f"Event {data} published inside {name}")
         else:
             raise RuntimeError("Streaming is not active.")
 
@@ -59,12 +60,12 @@ class _Streaming():
         self._subscription[name] = await self._sc.subscribe(
             name, queue=self.service_group, durable_name="durable", cb=callback)
 
-    async def unsubscribe(self, name):
+    async def unsubscribe(self, name: str) -> None:
         """Unsubscribe from a given channel."""
         if name in self._subscription:
             await self._subscription[name].unsubscribe()
 
-    async def stop(self):
+    async def stop(self) -> None:
         """Close all connections."""
         log.warning("Closing connections....")
         for subsciption in self._subscription.values():
