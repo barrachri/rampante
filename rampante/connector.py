@@ -7,7 +7,13 @@ Connector.
 
 import asyncio
 import logging
-from typing import Awaitable, Callable, Dict, Union, Optional
+from typing import (
+    Awaitable,
+    Callable,
+    Dict,
+    Optional,
+    Union,
+)
 
 import msgpack
 from nats.aio.client import Client as NATS
