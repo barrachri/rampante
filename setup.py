@@ -21,7 +21,7 @@ AUTHOR = 'Christian Barra'
 # What packages are required for this module to be executed?
 REQUIRED = [
     "tenacity>=4.8.0",
-    "asyncio-nats-streaming>=0.1.2",
+    "aioredis>=1",
     "msgpack-python>=0.4.8"
 ]
 

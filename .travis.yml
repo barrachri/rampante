@@ -16,7 +16,7 @@ services:
   - docker
 
 install:
-  - docker run -d --name streams -p 4222:4222 nats-streaming:0.7.0
+  - docker run -d --name streams -p 6379:6379 redis:5.0-rc4-alpine
   - pip install -U attrs
   - pip install -r requirements/common.txt
   - pip install -r requirements/ci.txt
