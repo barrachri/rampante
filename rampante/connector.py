@@ -13,14 +13,28 @@ from typing import (
     Dict,
     Optional,
     Union,
+    List
 )
 
 import msgpack
-from nats.aio.client import Client as NATS
-from stan.aio.client import Client as STAN
+import aioredis
 from tenacity import retry, wait_random_exponential
 
 log = logging.getLogger("rampante.connector")
+
+
+
+loop = asyncio.get_event_loop()
+
+async def go():
+    redis = await aioredis.create_redis(
+        'redis://localhost', loop=loop)
+    await redis.set('my-key', 'value')
+    val = await redis.get('my-key')
+    print(val)
+    redis.close()
+    await redis.wait_closed()
+loop.run_until_complete(go())
 
 
 class _Streaming():
@@ -30,10 +44,9 @@ class _Streaming():
 
     """
     def __init__(self) -> None:
-        self._nc: NATS = None
-        self._sc: STAN = None
+        self._redis = None
         self._status = False
-        self._subscription: Dict = {}
+        self._subscription: List = []
         self.service_group: Optional[str] = None
 
     @retry(wait=wait_random_exponential(multiplier=1, max=10))
@@ -42,11 +55,7 @@ class _Streaming():
         if self._status is False:
             loop = loop or asyncio.get_event_loop()
             self.service_group = service_group
-            self._nc = NATS()
-            await self._nc.connect(servers=[server], io_loop=loop)
-            # Start session with NATS Streaming cluster.
-            self._sc = STAN()
-            await self._sc.connect("test-cluster", client_name, nats=self._nc)
+            self._redis = await aioredis.create_redis(server, loop=loop)
             self._status = True
             log.info("Streaming connected.")
         else:
@@ -55,16 +64,14 @@ class _Streaming():
     async def publish(self, name: str, data: Dict) -> None:
         """Publish a message inside a queue."""
         if self._status:
-            body = msgpack.packb(data)
-            await self._sc.publish(name, body)
+            await self._redis.xadd(name, body)
             log.info(f"Event {data} published inside {name}")
         else:
             raise RuntimeError("Streaming is not active.")
 
     async def subscribe(self, name: str, callback: Union[Callable, Awaitable]):
         """Subscribe to a given channel."""
-        self._subscription[name] = await self._sc.subscribe(
-            name, queue=self.service_group, durable_name="durable", cb=callback)
+        self._subscription[name] = self._redis.xread([name], timeout=10)
 
     async def unsubscribe(self, name: str) -> None:
         """Unsubscribe from a given channel."""
@@ -74,10 +81,8 @@ class _Streaming():
     async def stop(self) -> None:
         """Close all connections."""
         log.warning("Closing connections....")
-        for subsciption in self._subscription.values():
-            await subsciption.unsubscribe()
-        await self._sc.close()
-        await self._nc.close()
+        self._redis.close()
+        await self._redis.wait_closed()
         self._status = False
 
 
